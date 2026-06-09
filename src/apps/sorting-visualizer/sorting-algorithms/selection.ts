@@ -14,7 +14,10 @@ export async function* selectionSort(array: number[]): SortAsyncGenerator {
     let maxIndex = 0;
 
     for (j = 1; j < array.length - i; j++) {
-      yield* showPivot(maxIndex);
+      yield* showPivot(
+        maxIndex,
+        `Selecting candidate ${array[maxIndex]} to compare against ${array[j]}`
+      );
       yield* highlight(j);
 
       if (array[maxIndex] < array[j]) {
@@ -24,9 +27,14 @@ export async function* selectionSort(array: number[]): SortAsyncGenerator {
 
     j = j - 1;
     if (maxIndex !== j && array[maxIndex] !== array[j]) {
-      yield* swap(array, maxIndex, j);
+      yield* swap(
+        array,
+        maxIndex,
+        j,
+        `Swapping ${array[maxIndex]} into sorted position ${j}`
+      );
     }
 
-    yield* sort(j);
+    yield* sort(j, `Element at index ${j} is now placed correctly.`);
   }
 }

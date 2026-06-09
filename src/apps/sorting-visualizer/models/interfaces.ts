@@ -26,9 +26,23 @@ export interface UIProps {
   pivot?: number;
 }
 
+export interface SortAlgorithm {
+  name: string;
+  label: string;
+  fn: (array: number[]) => SortAsyncGenerator;
+  description: string;
+  howItWorks: string;
+  best: string;
+  average: string;
+  worst: string;
+  space: string;
+  uses: string;
+}
+
 export interface HeaderProps {
   algoName: string;
   isCompleted: boolean;
+  executionTime: number;
 }
 
 export interface NumberGenProps {
@@ -37,8 +51,7 @@ export interface NumberGenProps {
 
 export interface VisualizerProps {
   array: number[];
-  algoName: string;
-  algoFn: (array: number[]) => SortAsyncGenerator;
+  algo: SortAlgorithm;
   onComplete: () => void;
 }
 

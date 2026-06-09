@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import AlgoSelection from '@sortViz/components/controller/algo-selection';
 import NoInput from '@sortViz/components/visualizer/no-input';
 import Visualizer from '@sortViz/components/visualizer/visualizer';
+import { ComplexityComparisonTable } from '@sortViz/components/visualizer/educational-panels';
 import { sortCompletionMessage } from '@sortViz/config';
 import useCompletion from '@sortViz/hooks/use-completion.hook';
 import { algoList } from '@sortViz/sorting-algorithms/algo-list';
@@ -45,13 +46,14 @@ function AllAlgorithmLayout() {
     <MainLayout>
       <AlgoSelection />
 
+      <ComplexityComparisonTable />
+
       <div className={classes.allAlgos}>
         {selectedAlgos.map((algo) => (
           <Visualizer
             key={array.toString() + reset + algo.name}
             array={array}
-            algoName={algo.name}
-            algoFn={algo.fn}
+            algo={algo}
             onComplete={onComplete}
           />
         ))}

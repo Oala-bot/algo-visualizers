@@ -1,0 +1,134 @@
+@use '/src/host/styles/theme';
+
+.panel,
+.activityPanel {
+  width: 100%;
+  max-width: 100%;
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid theme.$shadow1;
+  background-color: theme.$background;
+  box-shadow: 0 0 4px theme.$shadow2;
+  text-align: left;
+}
+
+.infoHeader {
+  margin-bottom: 18px;
+
+  h3 {
+    margin: 0 0 10px;
+    font-size: 1.1rem;
+    text-transform: capitalize;
+  }
+
+  p {
+    margin: 0;
+    color: theme.$base;
+    opacity: 0.85;
+  }
+}
+
+.infoGrid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat( auto-fit, minmax(180px, 1fr) );
+  margin-bottom: 18px;
+
+  article {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  strong {
+    display: block;
+    font-size: 0.95rem;
+    color: theme.$base;
+  }
+
+  p,
+  li {
+    margin: 0;
+    color: theme.$base;
+    opacity: 0.8;
+    line-height: 1.4;
+  }
+
+  ul {
+    padding-left: 18px;
+    margin: 0;
+  }
+}
+
+.uses {
+  strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+
+  p {
+    margin: 0;
+    color: theme.$base;
+    opacity: 0.85;
+  }
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+th,
+td {
+  padding: 10px 12px;
+  border: 1px solid theme.$shadow1;
+}
+
+th {
+  text-align: left;
+  font-weight: 600;
+}
+
+.legendList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: theme.$base;
+}
+
+.legendColor {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1px solid theme.$shadow1;
+}
+
+.activityPanel {
+  margin: 16px 0 0;
+}
+
+.activityPanel h4 {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  letter-spacing: 0.025em;
+}
+
+.activityPanel p {
+  margin: 0;
+  color: theme.$base;
+  opacity: 0.9;
+}

@@ -21,7 +21,7 @@ async function* maxHeap(
   if (right < length) highlightArray.push(right);
 
   if (highlightArray.length > 0) {
-    yield* showPivot(i);
+    yield* showPivot(i, `Heapifying subtree at index ${i}.`);
     yield* highlight(...highlightArray);
   }
 
@@ -38,7 +38,12 @@ async function* maxHeap(
   }
 
   if (max !== i) {
-    yield* swap(array, i, max);
+    yield* swap(
+      array,
+      i,
+      max,
+      `Swapping ${array[i]} with child ${array[max]} to restore heap order.`
+    );
     yield* showPivot(-1);
     yield* maxHeap(array, max, length);
   }
@@ -52,10 +57,15 @@ export async function* heapSort(array: number[]): SortAsyncGenerator {
 
   for (let i = array.length - 1; i > 0; i--) {
     length--;
-    yield* sort(length);
-    yield* swap(array, 0, i);
+    yield* sort(length, `Placed the highest element at index ${length}.`);
+    yield* swap(
+      array,
+      0,
+      i,
+      `Moving the current maximum ${array[0]} to the end of the array.`
+    );
     yield* maxHeap(array, 0, length);
   }
 
-  yield* sort(0);
+  yield* sort(0, 'Heap sorting complete.');
 }

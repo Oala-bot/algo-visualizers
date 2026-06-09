@@ -21,6 +21,30 @@
   }
 }
 
+.footer {
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 18px;
+  text-align: left;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.complexityRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: theme.$base;
+  opacity: 0.95;
+}
+
 .warning {
   font-size: 1.15rem;
   font-weight: 500;

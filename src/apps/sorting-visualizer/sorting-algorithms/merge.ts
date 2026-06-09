@@ -1,4 +1,4 @@
-import { highlight, move, sort } from '@sortViz/helpers/algorithm-helpers';
+import { highlight, move, sort, showPivot } from '@sortViz/helpers/algorithm-helpers';
 
 import { SortAsyncGenerator } from '@sortViz/models/types';
 
@@ -10,7 +10,7 @@ export async function* mergeSort(
 ): SortAsyncGenerator {
   if (i === j) {
     if (isFinal && array.length === 1) {
-      yield* sort(i);
+      yield* sort(i, 'Single element is sorted.');
     }
 
     return;
@@ -38,6 +38,8 @@ async function* merge(
   size2: number,
   isFinal: boolean
 ): SortAsyncGenerator {
+  yield* showPivot(-1, 'Merging two sorted arrays.');
+
   let iMove = 0;
   let jMove = 0;
 
@@ -51,7 +53,7 @@ async function* merge(
       iMove++;
 
       if (isFinal) {
-        yield* sort(left);
+        yield* sort(left, `Left item ${array[left]} stays in place.`);
       }
     }
 
@@ -66,7 +68,7 @@ async function* merge(
       jMove++;
 
       if (isFinal) {
-        yield* sort(left);
+        yield* sort(left, `Placed ${value} into merged position.`);
       }
     }
   }
@@ -75,7 +77,7 @@ async function* merge(
     yield* highlight(k);
 
     if (isFinal) {
-      yield* sort(k);
+      yield* sort(k, `Left segment still sorted.`);
     }
   }
 
@@ -83,7 +85,7 @@ async function* merge(
     yield* highlight(k);
 
     if (isFinal) {
-      yield* sort(k);
+      yield* sort(k, `Right segment still sorted.`);
     }
   }
 }

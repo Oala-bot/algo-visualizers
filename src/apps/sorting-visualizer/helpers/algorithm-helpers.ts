@@ -10,7 +10,8 @@ import { delay } from '@/lib/helpers/async';
 export async function* swap(
   array: number[],
   i: number,
-  j: number
+  j: number,
+  message?: string
 ): SortAsyncGenerator {
   await simulator.isPlayingPromise;
 
@@ -18,7 +19,7 @@ export async function* swap(
   array[i] = array[j];
   array[j] = temp;
 
-  yield { type: 'swap', positions: [i, j] };
+  yield { type: 'swap', positions: [i, j], message };
   await delay(swapInterval);
 
   await simulator.isPlayingPromise;
@@ -35,12 +36,18 @@ export async function* highlight(...positions: number[]): SortAsyncGenerator {
   await simulator.isPlayingPromise;
 }
 
-export async function* showPivot(position: number): SortAsyncGenerator {
-  yield { type: 'pivot', position };
+export async function* showPivot(
+  position: number,
+  message?: string
+): SortAsyncGenerator {
+  yield { type: 'pivot', position, message };
 }
 
-export async function* sort(position: number): SortAsyncGenerator {
-  yield { type: 'sort', position: position };
+export async function* sort(
+  position: number,
+  message?: string
+): SortAsyncGenerator {
+  yield { type: 'sort', position, message };
 }
 
 export async function* move(...positions: number[]): SortAsyncGenerator {

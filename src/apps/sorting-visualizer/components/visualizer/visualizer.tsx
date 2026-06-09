@@ -1,29 +1,28 @@
 import { useEffect, useRef } from 'react';
 
 import Header from './header';
+import LiveActivityPanel from './educational-panels';
 import VisualizerDisplay from './visualizer-display';
 import { VisualizerProps } from '@sortViz/models/interfaces';
 import classes from './visualizer.module.scss';
 import useAlgo from '@sortViz/hooks/use-algo.hook';
 
-const Visualizer = function Visualizer({
-  array,
-  algoFn,
-  algoName = 'Bubble',
-  onComplete,
-}: VisualizerProps) {
+const Visualizer = function Visualizer({ array, algo, onComplete }: VisualizerProps) {
   const sortingArray = useRef([...array]);
 
   const {
     swapCount,
     compareCount,
+    moveCount,
+    executionTime,
     isCompleted,
     swaps,
     sorts,
     highlights,
     pivot,
     moves,
-  } = useAlgo(sortingArray.current, algoFn);
+    activity,
+  } = useAlgo(sortingArray.current, algo.fn);
 
   useEffect(() => {
     if (isCompleted) {
@@ -33,7 +32,13 @@ const Visualizer = function Visualizer({
 
   return (
     <section className={classes.container}>
-      <Header algoName={algoName} isCompleted={isCompleted} />
+      <Header
+        algoName={algo.label}
+        isCompleted={isCompleted}
+        executionTime={executionTime}
+      />
+
+      <LiveActivityPanel activity={activity} />
 
       <VisualizerDisplay
         pivot={pivot}
@@ -44,13 +49,24 @@ const Visualizer = function Visualizer({
         moves={moves}
       />
 
-      <footer>
-        <span>
-          Swaps: <strong>{swapCount}</strong>
-        </span>
-        <span>
-          Comparisons: <strong>{compareCount}</strong>
-        </span>
+      <footer className={classes.footer}>
+        <div className={classes.stats}>
+          <span>
+            Comparisons: <strong>{compareCount}</strong>
+          </span>
+          <span>
+            Swaps: <strong>{swapCount}</strong>
+          </span>
+          <span>
+            Moves: <strong>{moveCount}</strong>
+          </span>
+        </div>
+
+        <div className={classes.complexityRow}>
+          <span>Best: {algo.best}</span>
+          <span>Avg: {algo.average}</span>
+          <span>Worst: {algo.worst}</span>
+        </div>
       </footer>
     </section>
   );

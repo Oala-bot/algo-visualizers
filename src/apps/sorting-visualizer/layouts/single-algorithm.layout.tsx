@@ -41,8 +41,7 @@ function SingleAlgorithmLayout() {
       <Visualizer
         key={selectedAlgo.name + array.toString() + reset}
         array={array}
-        algoName={selectedAlgo.name}
-        algoFn={selectedAlgo.fn}
+        algo={selectedAlgo}
         onComplete={onComplete}
       />
     </MainLayout>

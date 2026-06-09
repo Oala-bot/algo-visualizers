@@ -10,10 +10,15 @@ export async function* bubbleSort(array: number[]): SortAsyncGenerator {
       yield* highlight(j, j + 1);
 
       if (array[j] > array[j + 1]) {
-        yield* swap(array, j, j + 1);
+        yield* swap(
+          array,
+          j,
+          j + 1,
+          `Swapping ${array[j]} and ${array[j + 1]}`
+        );
       }
     }
 
-    yield* sort(j);
+    yield* sort(j, `Element at index ${j} is in its final position.`);
   }
 }

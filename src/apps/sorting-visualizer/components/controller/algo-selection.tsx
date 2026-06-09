@@ -20,23 +20,32 @@ function AlgoSelection() {
 
   return (
     <div className={classes.checkboxWrapper}>
-      {selectedAlgosStatus.map((checked, idx) => (
-        <li key={idx} className={classes.listItem}>
-          <div className={classes.checkbox}>
-            <input
-              type="checkbox"
-              id={`custom-checkbox-${algoList[idx].name}`}
-              name={algoList[idx].name}
-              value={algoList[idx].name}
-              checked={checked}
-              onChange={() => handleOnChange(idx)}
-            />
-            <label htmlFor={`custom-checkbox-${algoList[idx].name}`}>
-              {algoList[idx].name}
-            </label>
-          </div>
-        </li>
-      ))}
+      {selectedAlgosStatus.map((checked, idx) => {
+        const algo = algoList[idx];
+
+        // Skip if algorithm is not defined (defensive check)
+        if (!algo) {
+          return null;
+        }
+
+        return (
+          <li key={idx} className={classes.listItem}>
+            <div className={classes.checkbox}>
+              <input
+                type="checkbox"
+                id={`custom-checkbox-${algo.name}`}
+                name={algo.name}
+                value={algo.name}
+                checked={checked}
+                onChange={() => handleOnChange(idx)}
+              />
+              <label htmlFor={`custom-checkbox-${algo.name}`}>
+                {algo.label}
+              </label>
+            </div>
+          </li>
+        );
+      })}
     </div>
   );
 }

@@ -16,7 +16,7 @@ async function* partition(
   let i = low;
   let j = high + 1;
 
-  yield* showPivot(pivot);
+  yield* showPivot(pivot, `Pivot selected: ${array[pivot]}`);
 
   while (i < j) {
     while (--j > low) {
@@ -35,15 +35,25 @@ async function* partition(
     }
 
     if (i < j) {
-      yield* swap(array, i, j);
+      yield* swap(
+        array,
+        i,
+        j,
+        `Swapping ${array[i]} and ${array[j]} around the pivot.`
+      );
     }
   }
 
   if (pivot !== j) {
-    yield* swap(array, pivot, j);
+    yield* swap(
+      array,
+      pivot,
+      j,
+      `Placing pivot ${array[pivot]} into final sorted position.`
+    );
   }
 
-  yield* sort(j);
+  yield* sort(j, `Index ${j} is now partitioned.`);
   return j;
 }
 
